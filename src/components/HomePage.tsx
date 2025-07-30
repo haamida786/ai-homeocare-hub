@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Stethoscope, Users, Shield, Brain, UserPlus } from "lucide-react";
+import { Stethoscope, Users, Shield, Brain } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
 
 interface HomePageProps {
   onDoctorRegister: () => void;
   onPatientLogin: () => void;
-  onPatientRegister: () => void;
 }
 
-export const HomePage = ({ onDoctorRegister, onPatientLogin, onPatientRegister }: HomePageProps) => {
+export const HomePage = ({ onDoctorRegister, onPatientLogin }: HomePageProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-medical-light-blue to-background">
       {/* Header */}
@@ -49,17 +48,7 @@ export const HomePage = ({ onDoctorRegister, onPatientLogin, onPatientRegister }
                   size="lg"
                   className="text-lg px-8 py-6"
                 >
-                  <UserPlus className="w-5 h-5 mr-2" />
                   Register as Doctor
-                </Button>
-                <Button 
-                  onClick={onPatientRegister}
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 py-6 border-medical-secondary text-medical-secondary hover:bg-medical-secondary/10"
-                >
-                  <UserPlus className="w-5 h-5 mr-2" />
-                  Patient Registration
                 </Button>
                 <Button 
                   onClick={onPatientLogin}
@@ -67,7 +56,6 @@ export const HomePage = ({ onDoctorRegister, onPatientLogin, onPatientRegister }
                   size="lg"
                   className="text-lg px-8 py-6"
                 >
-                  <Shield className="w-5 h-5 mr-2" />
                   Patient Login (via Token)
                 </Button>
               </div>
