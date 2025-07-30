@@ -64,7 +64,8 @@ export const DoctorDashboard = ({ doctor, onLogout }: DoctorDashboardProps) => {
     age: "",
     symptoms: "",
     prescription: "",
-    duration: ""
+    duration: "",
+    token: ""
   });
   
   const [searchQuery, setSearchQuery] = useState("");
@@ -95,13 +96,13 @@ export const DoctorDashboard = ({ doctor, onLogout }: DoctorDashboardProps) => {
       symptoms: newPatient.symptoms,
       prescription: newPatient.prescription,
       duration: parseInt(newPatient.duration),
-      token: generateToken(),
+      token: newPatient.token.trim() || generateToken(),
       createdAt: new Date(),
       daysLeft: parseInt(newPatient.duration)
     };
 
     setPatients([...patients, patient]);
-    setNewPatient({ name: "", age: "", symptoms: "", prescription: "", duration: "" });
+    setNewPatient({ name: "", age: "", symptoms: "", prescription: "", duration: "", token: "" });
     
     toast({
       title: "Patient Added Successfully",
@@ -279,16 +280,27 @@ export const DoctorDashboard = ({ doctor, onLogout }: DoctorDashboardProps) => {
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="duration">Duration (days)</Label>
-                      <Input
-                        id="duration"
-                        type="number"
-                        placeholder="Treatment duration in days"
-                        value={newPatient.duration}
-                        onChange={(e) => setNewPatient({ ...newPatient, duration: e.target.value })}
-                        required
-                      />
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="duration">Duration (days)</Label>
+                        <Input
+                          id="duration"
+                          type="number"
+                          placeholder="Treatment duration in days"
+                          value={newPatient.duration}
+                          onChange={(e) => setNewPatient({ ...newPatient, duration: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="patientToken">Patient Token (Optional)</Label>
+                        <Input
+                          id="patientToken"
+                          placeholder="Enter custom token or leave blank to auto-generate"
+                          value={newPatient.token}
+                          onChange={(e) => setNewPatient({ ...newPatient, token: e.target.value })}
+                        />
+                      </div>
                     </div>
 
                     <Button type="submit" className="w-full">
