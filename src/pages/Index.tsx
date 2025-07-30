@@ -3,8 +3,9 @@ import { HomePage } from "@/components/HomePage";
 import { DoctorRegister } from "@/components/DoctorRegister";
 import { DoctorDashboard } from "@/components/DoctorDashboard";
 import { PatientPortal } from "@/components/PatientPortal";
+import { PatientRegistration } from "@/components/PatientRegistration";
 
-type View = "home" | "doctor-register" | "doctor-dashboard" | "patient-portal";
+type View = "home" | "doctor-register" | "doctor-dashboard" | "patient-portal" | "patient-register";
 
 interface Doctor {
   id: string;
@@ -32,6 +33,7 @@ const Index = () => {
       <HomePage 
         onDoctorRegister={() => setCurrentView("doctor-register")}
         onPatientLogin={() => setCurrentView("patient-portal")}
+        onPatientRegister={() => setCurrentView("patient-register")}
       />
     );
   }
@@ -58,6 +60,14 @@ const Index = () => {
   if (currentView === "patient-portal") {
     return (
       <PatientPortal 
+        onBack={() => setCurrentView("home")}
+      />
+    );
+  }
+
+  if (currentView === "patient-register") {
+    return (
+      <PatientRegistration 
         onBack={() => setCurrentView("home")}
       />
     );
